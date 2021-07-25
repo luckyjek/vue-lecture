@@ -20,18 +20,6 @@
 export default {
     data() {
         return {
-            rul: "http://localhost:8080/img/logo.82b9c7a5.png",
-            textValue: "",
-            isActive: true,
-            isRed: true,
-            activeClass: "active",
-            redClass: "text-red",
-            styleObject: {
-                // 주의: 인라인스타일로 바인딩 할때는 , camelCase를 사용해야한다.
-                backgroundColor: "yellow",
-                color: "red",
-                fontWeight: "bold",
-            },
             baseStyle: "background-color:yellow;width:100%;height:200px;",
             addStyle: "color:red;font-weight:bold",
         };

@@ -4,9 +4,51 @@ import Example from "../views/Example.vue";
 import Example2 from "../views/Example2.vue";
 import Example3 from "../views/Example3.vue";
 import Example4 from "../views/Example4.vue";
+import ListRander from "../views/ListRander.vue";
+import BasicRander from "../views/BasicRander.vue";
+import EventButton from "../views/EventButton.vue";
+import ComputedStudy from "../views/ComputedStudy.vue";
+import WatchStudy from "../views/WatchStudy.vue";
+import SaveStudy from "../views/SaveStudy.vue";
+import Search from "../views/Search.vue";
 // import Contact from "../views/Contact.vue";
 
 const routes = [
+    {
+        path: "/search",
+        name: "Search",
+        component: Search,
+    },
+    {
+        path: "/savestudy",
+        name: "SaveStudy",
+        component: SaveStudy,
+    },
+    {
+        path: "/watchstudy",
+        name: "WatchStudy",
+        component: WatchStudy,
+    },
+    {
+        path: "/computedstudy",
+        name: "ComputedStudy",
+        component: ComputedStudy,
+    },
+    {
+        path: "/eventbutton",
+        name: "EventButton",
+        component: EventButton,
+    },
+    {
+        path: "/basicrander",
+        name: "BasicRander",
+        component: BasicRander,
+    },
+    {
+        path: "/listRander",
+        name: "ListRander",
+        component: ListRander,
+    },
     {
         path: "/example4",
         name: "Example4",
