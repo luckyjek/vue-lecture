@@ -11,9 +11,15 @@ import ComputedStudy from "../views/ComputedStudy.vue";
 import WatchStudy from "../views/WatchStudy.vue";
 import SaveStudy from "../views/SaveStudy.vue";
 import Search from "../views/Search.vue";
+import ServerData from "../views/ServerData.vue";
 // import Contact from "../views/Contact.vue";
 
 const routes = [
+    {
+        path: "/serverdata",
+        name: "ServerData",
+        component: ServerData,
+    },
     {
         path: "/search",
         name: "Search",
