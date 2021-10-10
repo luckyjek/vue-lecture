@@ -1,7 +1,21 @@
 <template>
     <div>
         <!--https://www.youtube.com/watch?v=ibYCwlEmILI-->
-
+        <h2>
+            응용버전( 사용을 하다보면 이벤트뿐만아니라 파라미터를 함께 넘겨줘야
+            할때도 있을텐데 )
+        </h2>
+        <div>{{ message }}</div>
+        <button @click="addNumber($event, 10)">10더하기</button
+        ><button @click="addNumber($event, 100)">100더하기</button>
+        <hr />
+        <!-- <h1>{{ count }}</h1>
+        <button v-on:click="addNumber(1)">증가</button>
+        <button v-on:click="minusNumber">감소</button>
+        <button v-on:mouseover="addNumber(10)">마우스오버10증가</button>
+        <div>{{ message }}</div>
+        <div @click="getMousePosition" class="box"></div> -->
+        <hr />
         <h2 v-for="(animal, index) in animals" :key="index">
             {{ animal }} index:: {{ index }}
         </h2>
@@ -66,8 +80,25 @@
 
 export default {
     name: "App",
+    methods: {
+        addNumber(e, value) {
+            e.pageX;
+            this.message = `마우스 좌표 ${
+                e.pageX
+            }와 더하기 ${value}는 ${e.pageX + value}입니다.`;
+        },
+        minusNumber() {
+            this.count = this.count - 1;
+        },
+        getMousePosition(event) {
+            console.log(event);
+            this.message = `마우스의 위치는 ${event.pageX}, ${event.pageY}입니다.`;
+        },
+    },
     data() {
         return {
+            message: "",
+            count: 0,
             animals: ["monkey", "rat", "dog", "lion", "monkey"],
             users: [
                 {
@@ -125,5 +156,15 @@ input {
 }
 .not-good {
     text-decoration: line-through;
+}
+button {
+    width: 100px;
+    height: 100px;
+    margin-top: 24px;
+}
+.box {
+    width: 300px;
+    height: 300px;
+    background: salmon;
 }
 </style>
