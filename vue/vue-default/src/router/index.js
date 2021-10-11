@@ -76,6 +76,30 @@ const routes = [
                 /* webpackChunkName: "databindinghtml" */ "../views/SlotUseModalLayout.vue"
             ),
     },
+    {
+        path: "/mixin",
+        name: "MixinTest",
+        component: () =>
+            import(
+                /* webpackChunkName: "databindinghtml" */ "../views/MixinTest.vue"
+            ),
+    },
+    {
+        path: "/calculator",
+        name: "Calculator",
+        component: () =>
+            import(
+                /* webpackChunkName: "databindinghtml" */ "../views/Calculator.vue"
+            ),
+    },
+    {
+        path: "/compositionapi",
+        name: "/CompositionAPI",
+        component: () =>
+            import(
+                /* webpackChunkName: "databindinghtml" */ "../views/CompositionAPI.vue"
+            ),
+    },
 ];
 
 const router = createRouter({
