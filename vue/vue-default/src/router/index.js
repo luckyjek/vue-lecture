@@ -100,6 +100,14 @@ const routes = [
                 /* webpackChunkName: "databindinghtml" */ "../views/CompositionAPI.vue"
             ),
     },
+    {
+        path: "/storeaccess",
+        name: "/StoreAccess",
+        component: () =>
+            import(
+                /* webpackChunkName: "databindinghtml" */ "../views/StoreAccess.vue"
+            ),
+    },
 ];
 
 const router = createRouter({
