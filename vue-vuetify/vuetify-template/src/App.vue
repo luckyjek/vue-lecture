@@ -1,29 +1,59 @@
 <template>
   <v-app>
-    <!-- v-main은 컨텐츠 영역이다. -->
-    <v-app-bar v-if="$vuetify.breakpoint.xsOnly" app />
-    <v-navigation-drawer app />
+    <v-app-bar app color="primary" dark>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <v-spacer />
+    </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" app>
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="text-h6">
+            Application
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            subtext
+          </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-divider />
+
+      <v-list dense nav>
+        <v-list-item v-for="item in items" :key="item.title" link :to="item.to">
+          <v-list-item-icon>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
     <v-main>
+      <!--router-view 를 감쌌다.-->
       <v-container fluid>
-        컨텐츠영역
+        <router-view />
       </v-container>
     </v-main>
-    <v-footer app />
   </v-app>
 </template>
+
 <script>
 export default {
-  name: "",
-  components: {},
-  data() {
-    return {
-      sampleData: ""
-    };
-  },
-  setup() {},
-  created() {},
-  mounted() {},
-  unmounted() {},
-  methods: {}
+  name: "App",
+
+  data: () => ({
+    drawer: false,
+    items: [
+      { title: "Dashboard", icon: "mdi-view-dashboard", to: "/" },
+      { title: "GridSystem", icon: "mdi-image", to: "/grid-system" },
+      { title: "Breakpoints", icon: "mdi-image", to: "/breakpoints" },
+      { title: "Grid List Page", icon: "mdi-image", to: "/grid-list-page" }
+    ],
+    right: null
+  })
 };
 </script>
