@@ -1,86 +1,140 @@
 <template>
-  <v-container>
-    <v-card class="pa-3">
-      <v-form ref="form" v-model="valid" lazy-validation>
-        <v-text-field
-          v-model="name"
-          :counter="10"
-          :rules="nameRules"
-          label="Name"
-          required
-        ></v-text-field>
+  <v-container fluid>
+    <v-card>
+      <v-card-title>
+        Form Validation
+      </v-card-title>
+      <v-card-text>
+        <validation-observer ref="observer" v-slot="{ invalid }">
+          <v-form ref="form" @submit.prevent="submit">
+            <validation-provider
+              v-slot="{ errors }"
+              name="Name"
+              :rules="{
+                required: true,
+                max: 20
+              }"
+            >
+              <v-text-field
+                v-model="name"
+                :counter="20"
+                label="Name"
+                :error-messages="errors"
+              />
+            </validation-provider>
 
-        <v-text-field
-          v-model="email"
-          :rules="emailRules"
-          label="E-mail"
-          required
-        ></v-text-field>
+            <validation-provider
+              v-slot="{ errors }"
+              name="Phone Number"
+              :rules="{
+                required: true,
+                numeric: true,
+                digits: 11
+              }"
+            >
+              <v-text-field
+                v-model="phoneNumber"
+                :counter="11"
+                label="Phone Number"
+                :error-messages="errors"
+              />
+            </validation-provider>
 
-        <v-select
-          v-model="select"
-          :items="items"
-          :rules="[v => !!v || 'Item is required']"
-          label="Item"
-          required
-        ></v-select>
+            <validation-provider
+              v-slot="{ errors }"
+              name="E-mail"
+              :rules="{
+                required: true,
+                email: true
+              }"
+            >
+              <v-text-field
+                v-model="email"
+                label="E-mail"
+                :error-messages="errors"
+              />
+            </validation-provider>
+            <validation-provider
+              v-slot="{ errors }"
+              name="select"
+              rules="required"
+            >
+              <v-select
+                v-model="select"
+                :items="items"
+                label="Select"
+                :error-messages="errors"
+              />
+            </validation-provider>
 
-        <v-checkbox
-          v-model="checkbox"
-          :rules="[v => !!v || 'You must agree to continue!']"
-          label="Do you agree?"
-          required
-        ></v-checkbox>
+            <validation-provider
+              v-slot="{ errors }"
+              name="checkbox"
+              :rules="{
+                required: true
+              }"
+            >
+              <v-checkbox
+                v-model="checkbox"
+                value="1"
+                label="Option"
+                type="checkbox"
+                required
+                :error-messages="errors"
+              />
+            </validation-provider>
 
-        <v-btn
-          :disabled="!valid"
-          color="success"
-          class="mr-4"
-          @click="validate"
-        >
-          Validate
-        </v-btn>
-
-        <v-btn color="error" class="mr-4" @click="reset">
-          Reset Form
-        </v-btn>
-
-        <v-btn color="warning" @click="resetValidation">
-          Reset Validation
-        </v-btn>
-      </v-form>
+            <v-btn
+              class="mr-4"
+              type="submit"
+              color="primary"
+              :disabled="invalid"
+            >
+              submit
+            </v-btn>
+            <v-btn @click="clear">
+              clear
+            </v-btn>
+          </v-form>
+        </validation-observer>
+      </v-card-text>
     </v-card>
   </v-container>
 </template>
 <script>
 export default {
   data: () => ({
-    valid: true,
+    customValue: null,
     name: "",
-    nameRules: [
-      v => !!v || "Name is required",
-      v => (v && v.length <= 10) || "Name must be less than 10 characters"
-    ],
+    phoneNumber: "",
     email: "",
-    emailRules: [
-      v => !!v || "E-mail is required",
-      v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-    ],
     select: null,
-    items: ["Item 1", "Item 2", "Item 3", "Item 4"],
-    checkbox: false
+    items: [
+      { text: "아이템1", value: 1 },
+      { text: "아이템2", value: 2 },
+      { text: "아이템3", value: 3 }
+    ],
+    checkbox: null
   }),
-
   methods: {
-    validate() {
-      this.$refs.form.validate();
+    submit() {
+      this.$refs.observer.validate().then(result => {
+        if (result) {
+          alert("성공");
+        } else {
+          alert("실패");
+        }
+      });
     },
-    reset() {
-      this.$refs.form.reset();
-    },
-    resetValidation() {
-      this.$refs.form.resetValidation();
+    clear() {
+      this.name = "";
+      this.phoneNumber = "";
+      this.email = "";
+      this.select = null;
+      this.checkbox = null;
+      this.$refs.observer.reset();
     }
   }
 };
 </script>
+<style lang=""></style>

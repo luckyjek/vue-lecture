@@ -23,17 +23,30 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    component: DefaultLayout,
+    component: () =>
+      import(
+        /*webpackChunkName: "layouts-default-index"*/
+        "@/layouts/default/Index"
+      ),
     children: [
+      ,
       {
         path: "/",
         name: "Dashboard",
-        component: Dashboard
+        component: () =>
+          import(
+            /*webpackChunkName: "views-dashboard"*/
+            "@/views/Dashboard"
+          )
       },
       {
         path: "/grid-system",
         name: "GridSystem",
-        component: GridSystem
+        component: () =>
+          import(
+            /*webpackChunkName: "views-grid-list-page"*/
+            "@/views/GridListPage"
+          )
       },
       {
         path: "/grid-list-page",
